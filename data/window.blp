@@ -19,7 +19,15 @@ template $Window: Adw.ApplicationWindow {
 				primary-icon-name: "system-search-symbolic";
 			}
 
-			Grid icons_grid {}
+			ScrolledWindow scrolled_window {
+				vexpand: true;
+				hexpand: true;
+
+				GridView grid_view {
+					max-columns: 6;
+					enable-rubberband: true;
+				}
+			}
 		};
 	}
 }

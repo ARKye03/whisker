@@ -24,5 +24,6 @@ fn main() -> glib::ExitCode {
 fn build_ui(app: &Application) {
     // Create new window and present it
     let window = Window::new(app);
+    window.init_icons();
     window.present();
 }
