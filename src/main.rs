@@ -1,7 +1,8 @@
 mod window;
 
+use adw::Application;
 use gtk::prelude::*;
-use gtk::{gio, glib, Application};
+use gtk::{gio, glib};
 use window::Window;
 
 const APP_ID: &str = "org.gtk_rs.CompositeTemplates1";

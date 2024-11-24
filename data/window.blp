@@ -1,16 +1,25 @@
 using Gtk 4.0;
+using Adw 1;
 
-template $MyGtkAppWindow: Gtk.ApplicationWindow {
+template $Window: Adw.ApplicationWindow {
 	title: "Whisker";
 	default-width: 600;
 	default-height: 400;
 
-	Box {
-		orientation: vertical;
-		spacing: 10;
+	Adw.ToolbarView {
+		[top]
+		Adw.HeaderBar {}
 
-		Button button {
-			label: "Click me!";
-		}
+		content: Box {
+			orientation: vertical;
+			spacing: 10;
+
+			Entry entry {
+				placeholder-text: "Search...";
+				primary-icon-name: "system-search-symbolic";
+			}
+
+			Grid icons_grid {}
+		};
 	}
 }

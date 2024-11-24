@@ -1,22 +1,23 @@
+use adw::subclass::prelude::AdwApplicationWindowImpl;
 use glib::subclass::InitializingObject;
 use gtk::subclass::prelude::*;
-use gtk::{self, Button, CompositeTemplate, TemplateChild};
+use gtk::{self, CompositeTemplate, Entry, TemplateChild};
 use gtk::{glib, prelude::*};
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
 #[template(resource = "/com/github/arkye03/whisker/window.ui")]
 pub struct Window {
     #[template_child]
-    pub button: TemplateChild<Button>,
+    pub entry: TemplateChild<Entry>,
 }
 
 // The central trait for subclassing a GObject
 #[glib::object_subclass]
 impl ObjectSubclass for Window {
     // `NAME` needs to match `class` attribute of template
-    const NAME: &'static str = "MyGtkAppWindow";
+    const NAME: &'static str = "Window";
     type Type = super::Window;
-    type ParentType = gtk::ApplicationWindow;
+    type ParentType = adw::ApplicationWindow;
 
     fn class_init(klass: &mut Self::Class) {
         klass.bind_template();
@@ -34,9 +35,8 @@ impl ObjectImpl for Window {
         self.parent_constructed();
 
         // Connect to "clicked" signal of `button`
-        self.button.connect_clicked(move |button| {
-            // Set the label to "Hello World!" after the button has been clicked on
-            button.set_label("Hello World!");
+        self.entry.connect_changed(|_| {
+            println!("Entry changed");
         });
     }
 }
@@ -45,3 +45,5 @@ impl WidgetImpl for Window {}
 impl WindowImpl for Window {}
 
 impl ApplicationWindowImpl for Window {}
+
+impl AdwApplicationWindowImpl for Window {}
