@@ -1,22 +1,16 @@
 using Gtk 4.0;
-using Adw 1;
 
-template $Window: Adw.ApplicationWindow {
-    title: "RSIcon";
-    default-width: 600;
-    default-height: 400;
+template $MyGtkAppWindow: Gtk.ApplicationWindow {
+	title: "Whisker";
+	default-width: 600;
+	default-height: 400;
 
-    Adw.HeaderBar title-bar {
-        [start]
-        Button {
-            icon-name: "open-menu-symbolic";
-            tooltip-text: "Menu";
-        }
+	Box {
+		orientation: vertical;
+		spacing: 10;
 
-        [end]
-        MenuButton {
-            icon-name: "open-menu-symbolic";
-            tooltip-text: "Menu";
-        }
-    }
+		Button button {
+			label: "Click me!";
+		}
+	}
 }

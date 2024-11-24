@@ -1,6 +1,10 @@
+use glib::subclass::InitializingObject;
+use gtk::subclass::prelude::*;
+use gtk::{self, Button, CompositeTemplate, TemplateChild};
+use gtk::{glib, prelude::*};
 // Object holding the state
 #[derive(CompositeTemplate, Default)]
-#[template(resource = "/com/github/arkye03/rsicon/window.ui")]
+#[template(resource = "/com/github/arkye03/whisker/window.ui")]
 pub struct Window {
     #[template_child]
     pub button: TemplateChild<Button>,
@@ -36,3 +40,8 @@ impl ObjectImpl for Window {
         });
     }
 }
+impl WidgetImpl for Window {}
+
+impl WindowImpl for Window {}
+
+impl ApplicationWindowImpl for Window {}

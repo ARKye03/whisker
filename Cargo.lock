@@ -527,15 +527,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rsicon"
-version = "0.1.0"
-dependencies = [
- "glib-build-tools",
- "gtk4",
- "libadwaita",
-]
-
-[[package]]
 name = "rustc_version"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -669,6 +660,15 @@ name = "version-compare"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "852e951cb7832cb45cb1169900d19760cfa39b82bc0ea9c0e5a14ae88411c98b"
+
+[[package]]
+name = "whisker"
+version = "0.1.0"
+dependencies = [
+ "glib-build-tools",
+ "gtk4",
+ "libadwaita",
+]
 
 [[package]]
 name = "windows-sys"

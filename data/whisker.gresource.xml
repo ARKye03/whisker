@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/com/github/arkye03/rsicon">
+  <gresource prefix="/com/github/arkye03/whisker">
     <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
   </gresource>
 </gresources>
