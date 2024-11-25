@@ -38,6 +38,15 @@ mod imp {
         fn constructed(&self) {
             // Call "constructed" on parent
             self.parent_constructed();
+            // Get the outer window instance
+            let obj = self.obj();
+            self.entry.connect_search_changed(clone!(
+                #[weak]
+                obj,
+                move |_entry| {
+                    obj.filter_icons();
+                }
+            ));
         }
     }
     impl WidgetImpl for Window {}
