@@ -2,19 +2,14 @@ using Gtk 4.0;
 
 template $IconButton: Gtk.Button {
 	styles [
-		"card"
+		"flat"
 	]
 
-	Box {
-		orientation: vertical;
-		spacing: 6;
-		margin-top: 6;
-		margin-bottom: 6;
-		margin-start: 6;
-		margin-end: 6;
-
-		Gtk.Image image {
-			pixel-size: 24;
-		}
+	Image image {
+		hexpand: true;
+		vexpand: true;
+		valign: center;
+		halign: center;
+		pixel-size: 24;
 	}
 }

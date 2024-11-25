@@ -60,6 +60,7 @@ impl IconButton {
     pub fn new(icon_name: &str) -> Self {
         let obj: Self = Object::builder().build();
         obj.set_icon_name(icon_name);
+        obj.set_tooltip_text(Some(&icon_name));
         obj
     }
 

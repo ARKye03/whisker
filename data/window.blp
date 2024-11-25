@@ -14,9 +14,8 @@ template $Window: Adw.ApplicationWindow {
 			orientation: vertical;
 			spacing: 10;
 
-			Entry entry {
+			SearchEntry entry {
 				placeholder-text: "Search...";
-				primary-icon-name: "system-search-symbolic";
 			}
 
 			ScrolledWindow scrolled_window {
@@ -24,7 +23,7 @@ template $Window: Adw.ApplicationWindow {
 				hexpand: true;
 
 				GridView grid_view {
-					max-columns: 6;
+					max-columns: 8;
 					enable-rubberband: true;
 				}
 			}

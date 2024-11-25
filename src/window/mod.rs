@@ -3,15 +3,15 @@ mod icon;
 mod imp {
     use adw::subclass::prelude::AdwApplicationWindowImpl;
     use glib::subclass::InitializingObject;
+    use gtk::glib;
     use gtk::subclass::prelude::*;
-    use gtk::{self, CompositeTemplate, Entry, GridView, TemplateChild};
-    use gtk::{glib, prelude::*};
+    use gtk::{self, CompositeTemplate, GridView, SearchEntry, TemplateChild};
     // Object holding the state
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/com/github/arkye03/whisker/window.ui")]
     pub struct Window {
         #[template_child]
-        pub entry: TemplateChild<Entry>,
+        pub entry: TemplateChild<SearchEntry>,
         #[template_child]
         pub grid_view: TemplateChild<GridView>,
     }
@@ -53,7 +53,7 @@ use adw::Application;
 use glib::Object;
 use gtk::{
     gio, glib,
-    prelude::{Cast, ListItemExt},
+    prelude::{Cast, EditableExt, ListItemExt},
     subclass::prelude::ObjectSubclassIsExt,
 };
 
@@ -117,5 +117,9 @@ impl Window {
         imp.grid_view.set_model(Some(&selection_model));
         imp.grid_view.set_factory(Some(&factory));
     }
-    pub fn filter_icons() {}
+    pub fn filter_icons(&self) {
+        let imp = self.imp();
+        let search_text = imp.entry.get().text().to_string();
+        // TODO: Implement filtering logic based on search_text
+    }
 }
