@@ -1,6 +1,8 @@
 mod icon;
 
 mod imp {
+    use std::cell::RefCell;
+
     use adw::subclass::prelude::AdwApplicationWindowImpl;
     use glib::subclass::InitializingObject;
     use gtk::glib::{self, clone};
@@ -14,6 +16,7 @@ mod imp {
         pub entry: TemplateChild<SearchEntry>,
         #[template_child]
         pub grid_view: TemplateChild<GridView>,
+        pub original_icon_list: RefCell<Vec<String>>,
     }
 
     // The central trait for subclassing a GObject
@@ -59,6 +62,8 @@ mod imp {
 }
 
 use adw::Application;
+use fuzzy_matcher::skim::SkimMatcherV2;
+use fuzzy_matcher::FuzzyMatcher;
 use glib::Object;
 use gtk::{
     gio, glib,
@@ -84,9 +89,15 @@ impl Window {
         // Create model to hold icon names
         let gtk_theme = gtk::IconTheme::for_display(&gtk::gdk::Display::default().unwrap());
         let string_list = gtk::StringList::new(&[]);
+        let mut icon_names = Vec::new();
         for icon_name in gtk_theme.icon_names() {
             string_list.append(&icon_name);
+            icon_names.push(icon_name);
         }
+        *imp.original_icon_list.borrow_mut() = icon_names
+            .into_iter()
+            .map(|gstring| gstring.to_string())
+            .collect();
 
         // Create selection model
         let selection_model = gtk::NoSelection::new(Some(string_list));
@@ -126,9 +137,28 @@ impl Window {
         imp.grid_view.set_model(Some(&selection_model));
         imp.grid_view.set_factory(Some(&factory));
     }
+
     pub fn filter_icons(&self) {
         let imp = self.imp();
         let search_text = imp.entry.get().text().to_string();
-        // TODO: Implement filtering logic based on search_text
+        let matcher = SkimMatcherV2::default();
+
+        let filtered_icons: Vec<String> = imp
+            .original_icon_list
+            .borrow()
+            .iter()
+            .filter_map(|icon_name| {
+                if matcher.fuzzy_match(icon_name, &search_text).is_some() {
+                    Some(icon_name.clone())
+                } else {
+                    None
+                }
+            })
+            .collect();
+
+        let filtered_icon_refs: Vec<&str> = filtered_icons.iter().map(|s| s.as_str()).collect();
+        let string_list = gtk::StringList::new(&filtered_icon_refs);
+        let selection_model = gtk::NoSelection::new(Some(string_list));
+        imp.grid_view.set_model(Some(&selection_model));
     }
 }
