@@ -3,7 +3,7 @@ mod icon;
 mod imp {
     use adw::subclass::prelude::AdwApplicationWindowImpl;
     use glib::subclass::InitializingObject;
-    use gtk::glib;
+    use gtk::glib::{self, clone};
     use gtk::subclass::prelude::*;
     use gtk::{self, CompositeTemplate, GridView, SearchEntry, TemplateChild};
     // Object holding the state
