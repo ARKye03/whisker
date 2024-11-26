@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/com/github/arkye03/whisker">
     <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
+	<!-- <file>main.css</file> -->
   </gresource>
 </gresources>

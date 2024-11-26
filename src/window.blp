@@ -1,0 +1,32 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $Window: Adw.ApplicationWindow {
+	title: "Whisker";
+	default-width: 600;
+	default-height: 400;
+
+	Adw.ToolbarView {
+		[top]
+		Adw.HeaderBar {}
+
+		content: Box {
+			orientation: vertical;
+			spacing: 10;
+
+			SearchEntry entry {
+				placeholder-text: "Search...";
+			}
+
+			ScrolledWindow scrolled_window {
+				vexpand: true;
+				hexpand: true;
+
+				GridView grid_view {
+					max-columns: 8;
+					enable-rubberband: true;
+				}
+			}
+		};
+	}
+}

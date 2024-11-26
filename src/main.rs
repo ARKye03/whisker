@@ -1,3 +1,4 @@
+mod icon;
 mod window;
 
 use adw::Application;

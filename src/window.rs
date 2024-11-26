@@ -1,5 +1,3 @@
-mod icon;
-
 mod imp {
     use std::cell::RefCell;
 
@@ -10,7 +8,7 @@ mod imp {
     use gtk::{self, CompositeTemplate, GridView, SearchEntry, TemplateChild};
     // Object holding the state
     #[derive(CompositeTemplate, Default)]
-    #[template(resource = "/com/github/arkye03/whisker/window.ui")]
+    #[template(file = "src/window.blp")]
     pub struct Window {
         #[template_child]
         pub entry: TemplateChild<SearchEntry>,
@@ -71,6 +69,8 @@ use gtk::{
     subclass::prelude::ObjectSubclassIsExt,
 };
 
+use crate::icon::{self, IconButton};
+
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
         @extends gtk::ApplicationWindow, gtk::Window, gtk::Widget,
@@ -107,7 +107,7 @@ impl Window {
         factory.connect_setup(|_, list_item| {
             // Cast Object to ListItem
             let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
-            let icon_btn = icon::IconButton::new("");
+            let icon_btn = IconButton::new("");
             list_item.set_child(Some(&icon_btn));
         });
 

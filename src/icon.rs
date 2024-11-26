@@ -10,7 +10,7 @@ mod imp {
     use gtk::{glib, Image};
 
     #[derive(Default, CompositeTemplate)]
-    #[template(file = "src/window/icon.blp")]
+    #[template(file = "src/icon.blp")]
     pub struct IconButton {
         #[template_child]
         pub image: TemplateChild<Image>,
